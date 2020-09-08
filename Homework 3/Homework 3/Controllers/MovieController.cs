@@ -11,7 +11,8 @@ namespace Homework_3.Controllers
 {
     class MovieController
     {
-        private string db = @"C:\Users\Meri\Desktop\Agile-Csharp\Homework 3\Homework 3\db.json";
+        private string workingDir => Environment.CurrentDirectory;
+        private string db => Directory.GetParent(workingDir).Parent.Parent.FullName + @"\db.json";
 
         public List<Movie> GetMovies()
         {
@@ -24,8 +25,7 @@ namespace Homework_3.Controllers
         public void AddMovie(string name, string description, int length)
         {
             List<Movie> allMovies = GetMovies();
-            //WE NEED NEW WAY TO CREATE ID
-            int id = allMovies.Count;
+            int id = CreateMovieId(allMovies);
 
             Movie newMovie = new Movie(id, name, description, length);
             allMovies.Add(newMovie);
@@ -33,20 +33,17 @@ namespace Homework_3.Controllers
             //update json db
             string jsonString = JsonConvert.SerializeObject(allMovies);
             File.WriteAllText(db, jsonString);
-
         }
 
         public void RemoveMovie(int id)
         {
             List<Movie> allMovies = GetMovies();
 
-            //find movie by id, then remove it
             Movie toDelete = allMovies
                 .SingleOrDefault(movie => movie.Id == id);
 
             allMovies.Remove(toDelete);
 
-            //update json db
             string jsonString = JsonConvert.SerializeObject(allMovies);
             File.WriteAllText(db, jsonString);
         }
@@ -72,6 +69,22 @@ namespace Homework_3.Controllers
 
             string jsonString = JsonConvert.SerializeObject(dummyMovies);
             File.WriteAllText(db, jsonString);
+        }
+
+        private int CreateMovieId(List<Movie> movies)
+        {
+            var firstReserved = movies
+                .Select(x => x.Id)
+                .Min(x => x);
+
+            if (firstReserved > 1)
+                return firstReserved - 1;
+
+            var lastReserved = movies
+                .Select(movie => movie.Id)
+                .Max(movieId => movieId);
+
+            return lastReserved + 1;
         }
     }
 }

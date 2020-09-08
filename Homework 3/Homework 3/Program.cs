@@ -10,8 +10,13 @@ namespace Homework_3
     {
         static void Main(string[] args)
         {
-            IDK idk = new IDK();
-            idk.Run();
+            ConsoleUi ui = new ConsoleUi();
+            ui.WelcomeText();
+
+            while (true)
+            {
+                ui.MainMenu();
+            }
         }
     }
 }
