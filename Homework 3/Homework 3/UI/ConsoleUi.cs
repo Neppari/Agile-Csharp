@@ -64,7 +64,7 @@ namespace Homework_3.UI
 
         private void Quit()
         {
-            return;
+            //whoops
         }
 
         private void Help()
