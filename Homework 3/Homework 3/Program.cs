@@ -13,10 +13,7 @@ namespace Homework_3
             ConsoleUi ui = new ConsoleUi();
             ui.WelcomeText();
 
-            while (true)
-            {
-                ui.MainMenu();
-            }
+            ui.MainMenu();
         }
     }
 }

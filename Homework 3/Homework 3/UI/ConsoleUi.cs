@@ -24,47 +24,48 @@ namespace Homework_3.UI
 
         public void MainMenu()
         {
-            Console.WriteLine("Main Menu");
-            Console.WriteLine("Type a command (hint: 'help' displays all commands)");
-            string input = Console.ReadLine().ToLower().Trim();
-
-            switch (input)
+            while(true)
             {
-                case "help":
-                    Help();
-                    break;
+                Console.WriteLine("Main Menu");
+                Console.WriteLine("Type a command (hint: 'help' displays all commands)");
+                string input = Console.ReadLine().ToLower().Trim();
 
-                case "quit":
-                    Quit();
-                    break;
+                switch (input)
+                {
+                    case "help":
+                        Help();
+                        break;
 
-                case "search":
-                    Search();
-                    PromptContinue();
-                    break;
+                    case "quit":
+                        Quit();
+                        break;
 
-                case "add":
-                    Add();
-                    PromptContinue();
-                    break;
+                    case "search":
+                        Search();
+                        PromptContinue();
+                        break;
 
-                case "remove":
-                    Remove();
-                    PromptContinue();
-                    break;
+                    case "add":
+                        Add();
+                        PromptContinue();
+                        break;
 
-                default:
-                    Console.WriteLine("Invalid command.");
-                    PromptContinue();
-                    break;
-            }
+                    case "remove":
+                        Remove();
+                        PromptContinue();
+                        break;
 
-            
+                    default:
+                        Console.WriteLine("Invalid command.");
+                        PromptContinue();
+                        break;
+                }
+            }            
         }
 
         private void Quit()
         {
-            //whoops
+            Environment.Exit(0);
         }
 
         private void Help()
